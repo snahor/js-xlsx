@@ -1,3 +1,4 @@
+var utils;
 function decode_row(rowstr) { return parseInt(unfix_row(rowstr),10) - 1; }
 function encode_row(row) { return "" + (row + 1); }
 function fix_row(cstr) { return cstr.replace(/([A-Z]|^)(\d+)$/,"$1$$$2"); }
@@ -93,7 +94,7 @@ function sheet_to_json(sheet, opts){
 			case 3: hdr[C] = o.header[C - r.s.c]; break;
 			default:
 				if(val === undefined) continue;
-				hdr[C] = format_cell(val);
+				hdr[C] = utils.format_cell(val);
 		}
 	}
 
@@ -117,7 +118,7 @@ function sheet_to_json(sheet, opts){
 				default: throw 'unrecognized type ' + val.t;
 			}
 			if(v !== undefined) {
-				row[hdr[C]] = raw ? v : format_cell(val,v);
+				row[hdr[C]] = raw ? v : utils.format_cell(val,v);
 				isempty = false;
 			}
 		}
@@ -145,7 +146,7 @@ function sheet_to_csv(sheet, opts) {
 		rr = encode_row(R);
 		for(C = r.s.c; C <= r.e.c; ++C) {
 			val = sheet[cols[C] + rr];
-			txt = val !== undefined ? ''+format_cell(val) : "";
+			txt = val !== undefined ? ''+ utils.format_cell(val) : "";
 			for(i = 0, cc = 0; i !== txt.length; ++i) if((cc = txt.charCodeAt(i)) === fs || cc === rs || cc === 34) {
 				txt = "\"" + txt.replace(qreg, '""') + "\""; break; }
 			row += (C === r.s.c ? "" : FS) + txt;
@@ -181,7 +182,7 @@ function sheet_to_formulae(sheet) {
 	return cmds;
 }
 
-var utils = {
+utils = {
 	encode_col: encode_col,
 	encode_row: encode_row,
 	encode_cell: encode_cell,
