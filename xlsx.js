@@ -4,7 +4,7 @@
 /*jshint funcscope:true, eqnull:true */
 var XLSX = {};
 (function make_xlsx(XLSX){
-XLSX.version = '0.8.13';
+XLSX.version = '0.9.1';
 var current_codepage = 1200, current_cptable;
 if(typeof module !== "undefined" && typeof require !== 'undefined') {
 	if(typeof cptable === 'undefined') cptable = require('./dist/cpexcel');
@@ -8564,7 +8564,8 @@ function write_wb_xml(wb, opts) {
   for(var i = 0; i != wb.SheetNames.length; ++i) {
     var sheetName = wb.SheetNames[i];
     var sheet = wb.Sheets[sheetName]
-    if (sheet['!printHeader']) {
+
+    if (sheet && sheet['!printHeader']) {
       if (sheet['!printHeader'].length !== 2) {
         throw "!printHeaders must be an array of length 2: "+sheet['!printHeader'];
 
@@ -8579,7 +8580,7 @@ function write_wb_xml(wb, opts) {
     for(var i = 0; i != wb.SheetNames.length; ++i) {
       var sheetName = wb.SheetNames[i];
       var sheet = wb.Sheets[sheetName]
-      if (sheet['!printHeader']) {
+      if (sheet && sheet['!printHeader']) {
           var printHeader = sheet['!printHeader'];
 
         var range = "'" + sheetName + "'!$" + printHeader[0] + ":$" + printHeader[1];

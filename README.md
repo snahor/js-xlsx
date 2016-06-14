@@ -3,6 +3,8 @@
 This fork:
 
 - add the ability to specify a custom `format_cell` method by overiding the exported version
+- add a check before attempt to access ['!printHeader'].
+- 0.9.2 correspond to 0.8.14 of the original branch plus these fixes.
 
 # xlsx-style
 
