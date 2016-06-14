@@ -1,3 +1,9 @@
+**IMPORTANT**
+
+This fork:
+
+- add the ability to specify a custom `format_cell` method by overiding the exported version
+
 # xlsx-style
 
 Parser and writer for various spreadsheet formats.  Pure-JS cleanroom implementation from official specifications and related documents.
@@ -137,7 +143,7 @@ function handleDrop(e) {
   e.preventDefault();
   var files = e.dataTransfer.files;
   var i, f;
-  
+
   for (i = 0, f = files[i]; i != files.length; ++i) {
     var reader = new FileReader();
     var name = f.name;
@@ -161,7 +167,7 @@ drop_dom_element.addEventListener('drop', handleDrop, false);
 function handleFile(e) {
   var files = e.target.files;
   var i, f;
-  
+
   for (i = 0, f = files[i]; i != files.length; ++i) {
     var reader = new FileReader();
     var name = f.name;
@@ -522,7 +528,7 @@ The exported `write` and `writeFile` functions accept an options argument:
   so non-Excel tools may ignore the data or blow up in the presence of dates.
 - showGridLines and tabSelected are currently used when generating an XLSX file but not yet parse.
 - Props specifies workbook properties
-   
+
 
 
 
@@ -559,7 +565,7 @@ top-level attributes: `fill`, `font`, `numFmt`, `alignment`, and `border`.
 |                 | textRotation   | Number from `0` to `180` or `255` (default is `0`)
 |                 |                |  `90` is rotated up 90 degrees
 |                 |                |  `45` is rotated up 45 degrees
-|                 |                | `135` is rotated down 45 degrees 
+|                 |                | `135` is rotated down 45 degrees
 |                 |                | `180` is rotated down 180 degrees
 |                 |                | `255` is special,  aligned vertically
 | border          | top            | `{ style: BORDER_STYLE, color: COLOR_SPEC }`
